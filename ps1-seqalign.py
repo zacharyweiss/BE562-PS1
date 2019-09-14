@@ -16,7 +16,6 @@ def seqalignDP(seq1, seq2, subst_matrix, gap_penalty):
     TB = [[PTR_NONE for j in range(len(seq2)+1)] for i in range(len(seq1)+1)]
 
     # initialize dynamic programming table for Needleman-Wunsch alignment
-    # (Durbin p.20)
     for i in range(1, len(seq1)+1):
         F[i][0] = 0 - i*gap_penalty
         TB[i][0] = PTR_GAP2  # indicates a gap in seq2
@@ -46,16 +45,6 @@ def seqalignDP(seq1, seq2, subst_matrix, gap_penalty):
                 assert False
 
             #print(F[i][j])
-
-    #  (see for illustration Durbin p.21, Figure 2.5, but be careful what you
-    #   think of as rows and what you think of as columns)
-    #  Hence, the bases corresponding to F[i][j] are actually seq1[i-1] and
-    #  seq2[j-1].
-    #  Use the dictionary base_idx to convert from the character to an index to
-    #   look up entries of the substitution matrix.
-    #  To get started, you can complete and run the algorithm filling in only
-    #    F, and then figure out how to do TB.
-
     return F[len(seq1)][len(seq2)], F, TB
 
 
