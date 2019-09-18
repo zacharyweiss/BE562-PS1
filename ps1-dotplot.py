@@ -106,11 +106,8 @@ def main():
     seq1 = readSeq(file1)
     seq2 = readSeq(file2)
 
-    #
-    # You will need to modify the code below to
-
     # length of hash key
-    kmerlen = 30
+    kmerlen = 100
 
     # hash table for finding hits
     lookup = defaultdict(list)
@@ -119,6 +116,10 @@ def main():
     print("hashing seq1...")
     for i in range(len(seq1) - kmerlen + 1):
         key = seq1[i:i+kmerlen]
+        # key = seq1[i:i + kmerlen:4]
+        l=len(key)
+        for j in range(0,l,3):
+            key=key[0:j-1] + 'x' + key[j:l]
         lookup[key].append(i)
 
     # look up hashes in hash table
@@ -126,6 +127,11 @@ def main():
     hits = []
     for i in range(len(seq2) - kmerlen + 1):
         key = seq2[i:i+kmerlen]
+        # key = seq2[i:i+kmerlen:4]
+
+        l=len(key)
+        for j in range(0,l,3):
+            key=key[0:j-1] + 'x' + key[j:l]
 
         # store hits to hits list
         for hit in lookup.get(key, []):

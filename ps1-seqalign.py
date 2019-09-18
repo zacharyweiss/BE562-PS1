@@ -30,7 +30,7 @@ def seqalignDP(seq1, seq2, subst_matrix, gap_penalty):
             seq2_gap = F[i-1][j] - gap_penalty
             seq1_gap = F[i][j-1] - gap_penalty
             match_mism = F[i-1][j-1] + subst_matrix[base_idx[seq1[i-1]]][base_idx[seq2[j-1]]]
-            #F[i][j] = max(seq1_gap,seq2_gap,match_mism)
+            # F[i][j] = max(seq1_gap,seq2_gap,match_mism)
             F[i][j] = min(seq1_gap, seq2_gap, match_mism)
 
             if F[i][j]==match_mism:
